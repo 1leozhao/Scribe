@@ -109,7 +109,7 @@ generateNoteBtn.addEventListener('click', async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer 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`
+        'Authorization': 'Bearer ${process.env.OPEN_AI_API_KEY}'
       },
       body: JSON.stringify({
         model: "gpt-4-turbo",
