@@ -1,27 +1,23 @@
-// Grab elements from the DOM
 const recordBtn = document.getElementById('record-btn');
 const resetBtn = document.getElementById('reset-btn');
 const undoBtn = document.getElementById('undo-btn');
 const generateNoteBtn = document.getElementById('generate-note-btn');
 const transcriptionText = document.getElementById('transcription');
 const outputText = document.getElementById('output');
-const loadingIndicator = document.getElementById('loading-indicator'); // Grab the loading indicator
+const loadingIndicator = document.getElementById('loading-indicator');
 
-// Create a SpeechRecognition object
+// JS Web Speech
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
-// Configure recognition settings
 recognition.lang = 'en-US';
 recognition.interimResults = true;
 
-// Array to store each recording session
 let recordings = [];
 let isRecording = false;
 let currentRecording = '';
 let lastFinalTranscript = '';
 
-// Toggle recording when the button is clicked
 recordBtn.addEventListener('click', () => {
   if (isRecording) {
     recognition.stop();
@@ -49,7 +45,6 @@ recordBtn.addEventListener('click', () => {
   }
 });
 
-// Capture speech and update the textarea with the result
 recognition.addEventListener('result', (event) => {
   let interimTranscript = '';
   for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -95,7 +90,6 @@ function updateUndoButton() {
 
 updateUndoButton();
 
-// New function to handle clinical note generation
 generateNoteBtn.addEventListener('click', async () => {
   const fullTranscript = recordings.join('\n') + (currentRecording ? '\n' + currentRecording : '');
   const prompt = `This is a transcript from a provider and patient conversation:\n\n"${fullTranscript}"\n\nPlease generate a clinical note including HPI, review of systems, physical exam, and assessment and plan. Do not include anything that was not discussed in the conversation. If the recording does not appear to be a provider/patient conversation, state that.`;
@@ -105,26 +99,20 @@ generateNoteBtn.addEventListener('click', async () => {
   outputText.value = '';
 
   try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('/generate-note', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${process.env.OPEN_AI_API_KEY}'
       },
-      body: JSON.stringify({
-        model: "gpt-4-turbo",
-        messages: [{ role: "user", content: prompt }]
-      })
+      body: JSON.stringify({ prompt }),
     });
-    
+
     const data = await response.json();
 
-    // Set the new output
     outputText.value = data.choices[0].message.content || "No output received.";
   } catch (error) {
     outputText.value = "Error generating clinical note. Please try again.";
   } finally {
-    // Hide loading indicator and re-enable the button after processing
     loadingIndicator.style.display = 'none';
     generateNoteBtn.disabled = false;
   }
