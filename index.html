@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automated Scribe</title>
+  <!-- Link to the external CSS file -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Automated Scribe</h1>
+
+  <div class="container">
+    <!-- Button container for stacking buttons vertically -->
+    <div class="button-container">
+      <button id="record-btn">Start Recording</button>
+      <button id="reset-btn">Reset Recording</button>
+      <button id="undo-btn">Undo Last Recording</button>
+      <button id="generate-note-btn">Generate Clinical Note</button> <!-- New button for clinical note generation -->
+    </div>
+    
+    <!-- Text area to display the transcription -->
+    <textarea id="transcription" placeholder="Your speech will appear here..."></textarea>
+    
+    <!-- Text area to display the clinical note output -->
+    <textarea id="output" placeholder="Clinical note will appear here..." readonly></textarea> <!-- New output area -->
+    
+    <!-- Loading indicator -->
+    <div id="loading-indicator" style="display: none;">Processing...</div>
+  </div>
+
+  <!-- Link to the external JS file -->
+  <script src="script.js"></script>
+</body>
+</html>

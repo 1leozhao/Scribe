@@ -1,0 +1,53 @@
+/* Container for the buttons and text area */
+.container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Styling for buttons */
+button {
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Text area styling */
+textarea {
+  width: 400px;
+  height: 200px;
+  font-size: 14px;
+}
+
+/* Loading indicator styling */
+#loading-indicator {
+  font-size: 16px;
+  color: #007BFF;
+  margin-top: 10px;
+}
+
+/* Animation for the record button */
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% {
+      box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+  }
+  70% {
+      box-shadow: 0 0 0 15px rgba(255, 0, 0, 0);
+  }
+  100% {
+      box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+  }
+}
