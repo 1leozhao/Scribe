@@ -5,26 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ambient Medical Scribe</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Ambient Medical Scribe</h1>
+  <header>
+    <h1>Ambient Medical Scribe</h1>
+  </header>
 
-  <div class="container">
-    <div class="button-container">
-      <button id="record-btn">Start Recording</button>
-      <button id="reset-btn">Reset Recording</button>
-      <button id="undo-btn">Undo Last Recording</button>
-      <button id="generate-note-btn">Generate Clinical Note</button>
-      <button id="save-transcript-btn">Save Transcript</button>
-      <button id="save-note-btn">Save Clinical Note</button>
+  <main class="container">
+    <div class="card">
+      <div class="button-bar">
+        <button id="record-btn" class="primary-btn">Start Recording</button>
+        <button id="reset-btn" class="secondary-btn">Reset Recording</button>
+        <button id="undo-btn" class="secondary-btn">Undo Last Recording</button>
+        <button id="generate-note-btn" class="primary-btn">Generate Clinical Note</button>
+        <button id="save-transcript-btn" class="secondary-btn">Save Transcript</button>
+        <button id="save-note-btn" class="secondary-btn">Save Clinical Note</button>
+      </div>
+      
+      <textarea id="transcription" placeholder="Conversation will appear here..."></textarea>
+      
+      <textarea id="output" placeholder="Clinical note will appear here..." readonly></textarea>
+      
+      <div id="loading-indicator" class="loading">Processing...</div>
     </div>
-    
-    <textarea id="transcription" placeholder="Conversation will appear here..."></textarea>
-    
-    <textarea id="output" placeholder="Clinical note will appear here..." readonly></textarea> <!-- New output area -->
-    
-    <div id="loading-indicator" style="display: none;">Processing...</div>
-  </div>
+  </main>
 
   <script src="script.js"></script>
 </body>

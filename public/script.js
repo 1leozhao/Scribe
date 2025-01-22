@@ -88,11 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
   async function generateClinicalNote() {
     const fullTranscript = recordings.join('\n') + (currentRecording ? '\n' + currentRecording : '');
     const prompt = `This is a transcript from a provider and patient conversation:\n\n"${fullTranscript}"\n\nPlease generate a clinical note including HPI, review of systems, physical exam, and assessment and plan. Do not include anything that was not discussed in the conversation. 
-    After the assessment and plan please add a section called “Additional Considerations” and provide additional considerations and actions the doctor could have taken into account for their assessment and plan.
+    After the assessment and plan please add a section called "Additional Considerations" and provide additional considerations and actions the doctor could have taken into account for their assessment and plan.
     If the recording does not appear to be a provider/patient conversation, then simply write out a general summary of the conversation and list out any action items from the conversation.
     Please provide the output in plain text without any Markdown formatting.`;
 
-    loadingIndicator.style.display = 'block';
+    loadingIndicator.style.visibility = 'visible';
     generateNoteBtn.disabled = true;
     outputText.value = '';
 
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       outputText.value = "Error generating clinical note. Please try again.";
     } finally {
-      loadingIndicator.style.display = 'none';
+      loadingIndicator.style.visibility = 'hidden';
       generateNoteBtn.disabled = false;
     }
   }
